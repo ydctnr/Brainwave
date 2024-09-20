@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { brainwaveSymbol, check } from "../assets";
 import { collabApps, collabContent, collabText } from "../constants";
 import Button from "./Button";
@@ -5,6 +6,32 @@ import Section from "./Section";
 import { LeftCurve, RightCurve } from "./design/Collaboration";
 
 const Collaboration = () => {
+  const [visibleChecks, setVisibleChecks] = useState([false, false, false]);
+
+  useEffect(() => {
+    const popUpSequence = () => {
+      setVisibleChecks([true, false, false]);
+
+      setTimeout(() => {
+        setVisibleChecks([true, true, false]);
+      }, 1000);
+
+      setTimeout(() => {
+        setVisibleChecks([true, true, true]);
+      }, 2000);
+
+      setTimeout(() => {
+        setVisibleChecks([false, false, false]);
+      }, 3000);
+    };
+
+    popUpSequence();
+    const intervalId = setInterval(popUpSequence, 4000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+
   return (
     <Section crosses>
       <div className="container lg:flex">
@@ -14,10 +41,18 @@ const Collaboration = () => {
           </h2>
 
           <ul className="max-w-[22rem] mb-10 md:mb-14">
-            {collabContent.map((item) => (
+            {collabContent.map((item, index) => (
               <li className="mb-3 py-3" key={item.id}>
                 <div className="flex items-center">
-                  <img src={check} width={24} height={24} alt="check" />
+                <img
+                      width={24}
+                      height={24}
+                      src={check}
+                      style={{
+                        opacity: visibleChecks[index] ? 1 : 0,
+                        transition: "opacity 0.5s ease-in-out",
+                      }}
+                    />
                   <h6 className="body-2 ml-5">{item.title}</h6>
                 </div>
                 {item.text && (

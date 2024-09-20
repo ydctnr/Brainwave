@@ -9,6 +9,7 @@ import Generating from "./Generating";
 import Notification from "./Notification";
 import CompanyLogos from "./CompanyLogos";
 
+
 const Hero = () => {
   const parallaxRef = useRef(null);
 
@@ -25,10 +26,10 @@ const Hero = () => {
           <h1 className="h1 mb-6">
             Explore the Possibilities of&nbsp;AI&nbsp;Chatting with {` `}
             <span className="inline-block relative">
-              Brainwave{" "}
+               Brainwave{" "}
               <img
                 src={curve}
-                className="absolute top-full left-0 w-full xl:-mt-2"
+                className="absolute top-full left-0 w-full xl:-mt-2 animate-custom-bounce"
                 width={624}
                 height={28}
                 alt="Curve"

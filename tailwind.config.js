@@ -12,6 +12,10 @@ export default {
     extend: {
       
       keyframes: {
+        'spin-gradient': {
+          '0%': { backgroundPosition: '0% 0%' },
+          '100%': { backgroundPosition: '100% 100%' },
+        },
         spin: {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
@@ -31,17 +35,57 @@ export default {
           '0%, 100%': { transform: 'translateY(5)' },
           '50%': { transform: 'translateY(-1px)' },
         },
+        customBounce: {
+          '0%, 100%': {
+            transform: 'translateY(-25%)',
+            'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)',
+          },
+          '50%': {
+            transform: 'none',
+            'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
+          },
+        },
+        popUp: {
+          '0%': { opacity: '0', transform: 'scale(0.8)' },
+          '50%': { opacity: '1', transform: 'scale(1.05)' },
+          '100%': { opacity: '0', transform: 'scale(0.8)' },
+        },
+        videoBar: {
+          '0%, 20%': { 
+            transform: 'scaleX(0)', 
+            'transform-origin': 'left'
+          },
+          '40%': { 
+            transform: 'scaleX(1)', 
+            'transform-origin': 'left'
+          },
+          '60%': { 
+            transform: 'scaleX(1)', 
+            'transform-origin': 'right'
+          },
+        },
       },
 
       animation: {
         'bounce-slow': 'bounceSlow 12.4s ease-in-out infinite',
         'spin-slow': 'spin 1.7s linear infinite',
         'spin-slower': 'spin 4s linear infinite',
+        'spin-slowest': 'spin 10s linear infinite',
         'glow-spin': 'spin 4s linear infinite, glow 4s ease-in-out infinite',
+        'spin-gradient': 'spin-gradient 5s linear infinite',
+        'pop-up': 'popUp 3.5s ease-in-out infinite',
+        'custom-bounce': 'customBounce 2.5s infinite',
+        'videoBar': 'videoBar 4s ease-in-out forwards'
+      },
+      backgroundImage: {
+        'gradient-left': 'linear-gradient(to bottom, #89F9E8, #FACB7B)',
+        'gradient-top': 'linear-gradient(to left, #D87CEE, #FACB7B)',
+        'gradient-bottom': 'linear-gradient(to left, #9099FC, #89F9E8)',
+        'gradient-right': 'linear-gradient(to top, #9099FC, #D87CEE)',
       },
       boxShadow: {
-        glow: '0 0 8px rgba(255, 255, 255, 0.6)',
         rainbow: '0 0 5px rgba(255, 0, 0, 0.4), 0 0 10px rgba(255, 127, 0, 0.4), 0 0 15px rgba(255, 255, 0, 0.4), 0 0 20px rgba(0, 255, 0, 0.4), 0 0 25px rgba(0, 0, 255, 0.4), 0 0 30px rgba(75, 0, 130, 0.4), 0 0 35px rgba(148, 0, 211, 0.4)',
+        'custom-white': '0px 0px 5px #fff',
       },
 
       colors: {

@@ -1,8 +1,36 @@
+import { useState, useEffect } from "react";
+
 import { check } from "../assets";
 import { pricing } from "../constants";
 import Button from "./Button";
 
 const PricingList = () => {
+  const [visibleChecks, setVisibleChecks] = useState([false, false, false]);
+
+  useEffect(() => {
+    const popUpSequence = () => {
+      setVisibleChecks([true, false, false]);
+
+      setTimeout(() => {
+        setVisibleChecks([true, true, false]);
+      }, 1000);
+
+      setTimeout(() => {
+        setVisibleChecks([true, true, true]);
+      }, 2000);
+
+      setTimeout(() => {
+        setVisibleChecks([false, false, false]);
+      }, 3000);
+    };
+
+    popUpSequence();
+    const intervalId = setInterval(popUpSequence, 4000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+
   return (
     <div className="flex gap-[1rem] max-lg:flex-wrap">
       {pricing.map((item) => (
@@ -41,7 +69,15 @@ const PricingList = () => {
                 key={index}
                 className="flex items-start py-5 border-t border-n-6"
               >
-                <img src={check} width={24} height={24} alt="Check" />
+               <img
+                      width={24}
+                      height={24}
+                      src={check}
+                      style={{
+                        opacity: visibleChecks[index] ? 1 : 0,
+                        transition: "opacity 0.5s ease-in-out",
+                      }}
+                    />
                 <p className="body-2 ml-4">{feature}</p>
               </li>
             ))}
